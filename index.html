@@ -6,356 +6,276 @@
   <title>Maravilla e Iván · 11 de abril de 2026</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      min-height: 100vh;
-      background: linear-gradient(145deg, #f7c5d0 0%, #f4a8bc 40%, #e8869e 100%);
-      font-family: 'Lato', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-    }
-
-    .wedding-card {
-      width: 100%;
-      max-width: 600px;
-      padding: 2.5rem 2rem 3rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .bg-circle {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.12;
-      background: #fff;
-      pointer-events: none;
-    }
-
-    /* Header */
-    .header { text-align: center; margin-bottom: 2rem; }
-
-    .divider-top {
-      display: flex; align-items: center;
-      justify-content: center; gap: 10px;
-      margin-bottom: 0.7rem;
-    }
-    .divider-line { width: 60px; height: 1px; background: #8b1a3a; opacity: 0.6; }
-
-    .names {
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(2.2rem, 8vw, 3rem);
-      color: #6b0e2b;
-      line-height: 1.1;
-      margin-bottom: 0.4rem;
-      text-shadow: 0 1px 2px rgba(255,255,255,0.3);
-    }
-
-    .date {
-      font-family: 'Dancing Script', cursive;
-      font-size: 1.25rem;
-      color: #8b1a3a;
-      margin-bottom: 0.7rem;
-      letter-spacing: 0.05em;
-    }
-
-    /* Schedule */
-    .schedule { max-width: 520px; margin: 0 auto 2rem; }
-
-    .schedule-item {
-      display: flex; align-items: center; gap: 14px;
-      padding: 0.75rem 1rem; margin-bottom: 0.5rem;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.22);
-      border: 1px solid rgba(255,255,255,0.35);
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-    .schedule-item:hover {
-      transform: translateX(5px) scale(1.01);
-      background: rgba(255,255,255,0.35);
-    }
-
-    .item-emoji { font-size: 1.4rem; width: 36px; text-align: center; flex-shrink: 0; }
-
-    .item-content { flex: 1; }
-
-    .item-title {
-      font-weight: 700; font-size: 0.85rem;
-      letter-spacing: 0.12em; color: #6b0e2b;
-      text-transform: uppercase;
-    }
-
-    .item-venue { font-size: 0.75rem; color: #9b3a56; font-weight: 300; margin-top: 2px; }
-
-    .item-venue a {
-      color: #6b0e2b; text-decoration: none;
-      display: inline-flex; align-items: center; gap: 3px;
-      font-weight: 400;
-      border-bottom: 1px dashed rgba(107,14,43,0.4);
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .item-venue a:hover { color: #3d0717; border-bottom-color: #3d0717; }
-
-    .item-time {
-      font-size: 1.1rem; font-weight: 700;
-      color: #6b0e2b; white-space: nowrap; flex-shrink: 0;
-    }
-    .item-time.mystery { font-style: italic; opacity: 0.75; font-size: 0.95rem; }
-
-    /* Footer */
-    .footer { text-align: center; margin-top: 1.5rem; }
-
-    .footer-script {
-      font-family: 'Dancing Script', cursive;
-      font-size: 1.35rem; color: #6b0e2b;
-      line-height: 1.6; margin-bottom: 1.2rem;
-    }
-
-    .account-box {
-      background: rgba(255,255,255,0.25);
-      border: 1px solid rgba(255,255,255,0.4);
-      border-radius: 14px; padding: 1rem 1.5rem;
-      margin: 1.5rem auto 0; text-align: center; max-width: 400px;
-    }
-    .account-label {
-      font-size: 0.75rem; letter-spacing: 0.18em;
-      color: #8b1a3a; text-transform: uppercase;
-      margin-bottom: 0.35rem;
-    }
-    .account-number {
-      font-size: 1.05rem; font-weight: 700;
-      color: #6b0e2b; letter-spacing: 0.08em;
-    }
-
-    /* Floating illustrations */
-    .float-wine {
-      position: absolute; left: 1.5rem; top: 38%;
-      opacity: 0.35;
-      animation: floatWine 4s infinite ease-in-out;
-    }
-    .float-disco {
-      position: absolute; right: 1.2rem; top: 60%;
-      opacity: 0.35;
-      animation: floatDisco 3.5s infinite ease-in-out;
-    }
-    @keyframes floatWine {
-      0%,100% { transform: translateY(0) rotate(-5deg); }
-      50%      { transform: translateY(-10px) rotate(-5deg); }
-    }
-    @keyframes floatDisco {
-      0%,100% { transform: translateY(0) rotate(5deg); }
-      50%      { transform: translateY(-8px) rotate(8deg); }
-    }
-
-    /* Sparkles */
-    .sparkle { animation: twinkle 2s infinite ease-in-out; }
-    .sparkle:nth-child(2) { animation-delay: .4s; }
-    .sparkle:nth-child(3) { animation-delay: .8s; }
-    .sparkle:nth-child(4) { animation-delay: 1.2s; }
-    @keyframes twinkle {
-      0%,100% { opacity: 1; transform: scale(1); }
-      50%      { opacity: .4; transform: scale(.7); }
-    }
-
-    /* Pulse heart */
-    .pulse-heart { animation: pulseHeart 1.8s infinite ease-in-out; display: inline-block; }
-    @keyframes pulseHeart {
-      0%,100% { transform: scale(1); }
-      50%      { transform: scale(1.12); }
-    }
-
-    /* Responsive */
-    @media (max-width: 480px) {
-      .float-wine, .float-disco { display: none; }
-      .wedding-card { padding: 2rem 1rem 2.5rem; }
-    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{min-height:100vh;background:linear-gradient(145deg,#f7c5d0 0%,#f4a8bc 40%,#e8869e 100%);display:flex;justify-content:center;align-items:flex-start;}
+    .wc{width:100%;max-width:600px;padding:2.5rem 2rem 3rem;font-family:'Lato',sans-serif;position:relative;overflow:hidden;}
+    .bgc{position:absolute;border-radius:50%;opacity:.12;background:#fff;pointer-events:none;}
+    .header{text-align:center;margin-bottom:1.8rem;}
+    .dt{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:.6rem;}
+    .dl{width:60px;height:1px;background:#8b1a3a;opacity:.6;}
+    .names{font-family:'Dancing Script',cursive;font-size:clamp(2.1rem,8vw,2.9rem);color:#6b0e2b;line-height:1.1;margin-bottom:.3rem;text-shadow:0 1px 2px rgba(255,255,255,.3);}
+    .date{font-family:'Dancing Script',cursive;font-size:1.2rem;color:#8b1a3a;margin-bottom:.6rem;letter-spacing:.05em;}
+    .nav{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:1.4rem;}
+    .nb{background:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.5);color:#6b0e2b;font-family:'Lato',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:.45rem .8rem;border-radius:30px;cursor:pointer;transition:background .2s;}
+    .nb:hover{background:rgba(255,255,255,.5);}
+    .nb.active{background:#6b0e2b;color:#fce8ef;border-color:#6b0e2b;}
+    .panel{display:none;max-width:520px;margin:0 auto;}
+    .panel.active{display:block;}
+    .si{display:flex;align-items:center;gap:14px;padding:.75rem 1rem;margin-bottom:.5rem;border-radius:14px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);transition:transform .2s,background .2s;}
+    .si:hover{transform:translateX(5px) scale(1.01);background:rgba(255,255,255,.35);}
+    .ie{font-size:1.4rem;width:36px;text-align:center;flex-shrink:0;}
+    .ic{flex:1;}
+    .it{font-weight:700;font-size:.85rem;letter-spacing:.12em;color:#6b0e2b;text-transform:uppercase;}
+    .iv{font-size:.75rem;color:#9b3a56;margin-top:2px;}
+    .iv a{color:#6b0e2b;text-decoration:none;display:inline-flex;align-items:center;gap:3px;font-weight:400;border-bottom:1px dashed rgba(107,14,43,.4);transition:color .2s;}
+    .iv a:hover{color:#3d0717;}
+    .tm{font-size:1.1rem;font-weight:700;color:#6b0e2b;white-space:nowrap;flex-shrink:0;}
+    .tm.my{font-style:italic;opacity:.75;font-size:.95rem;}
+    .ec{background:rgba(255,255,255,.28);border:1px solid rgba(255,255,255,.45);border-radius:18px;padding:1.4rem;margin-bottom:1rem;}
+    .ec h3{font-family:'Dancing Script',cursive;font-size:1.45rem;color:#6b0e2b;margin-bottom:.5rem;}
+    .ec p{font-size:.88rem;color:#7a1f3a;line-height:1.6;margin-bottom:.9rem;}
+    .bb{display:inline-flex;align-items:center;gap:8px;background:#6b0e2b;color:#fce8ef;font-family:'Lato',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.65rem 1.3rem;border-radius:30px;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .15s;}
+    .bb:hover{background:#3d0717;transform:scale(1.02);}
+    .mn{width:100%;padding:.6rem 1rem;margin-bottom:.7rem;border-radius:12px;border:1px solid rgba(107,14,43,.25);background:rgba(255,255,255,.5);color:#3d0717;font-family:'Lato',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;}
+    .mn:focus,.mta:focus{border-color:#8b1a3a;}
+    .mn::placeholder,.mta::placeholder{color:#c07090;}
+    .mta{width:100%;min-height:120px;padding:.7rem 1rem;border-radius:12px;border:1px solid rgba(107,14,43,.25);background:rgba(255,255,255,.5);color:#3d0717;font-family:'Lato',sans-serif;font-size:.88rem;resize:vertical;outline:none;transition:border-color .2s;margin-bottom:.9rem;}
+    .ms{color:#6b0e2b;font-family:'Dancing Script',cursive;font-size:1.2rem;text-align:center;padding:.8rem 0;display:none;}
+    .taxi-grid{display:grid;grid-template-columns:1fr;gap:.6rem;}
+    .taxi-card{background:rgba(255,255,255,.32);border:1px solid rgba(255,255,255,.5);border-radius:14px;padding:.9rem 1rem;cursor:pointer;transition:background .2s,transform .15s;}
+    .taxi-card:hover{background:rgba(255,255,255,.48);transform:translateY(-1px);}
+    .taxi-name{font-weight:700;font-size:.82rem;letter-spacing:.1em;color:#6b0e2b;text-transform:uppercase;}
+    .taxi-info{display:none;margin-top:.5rem;border-top:1px dashed rgba(107,14,43,.2);padding-top:.5rem;}
+    .taxi-card.open .taxi-info{display:block;}
+    .taxi-row{font-size:.82rem;color:#7a1f3a;margin-bottom:.3rem;display:flex;align-items:center;gap:6px;}
+    .taxi-row a{color:#6b0e2b;text-decoration:none;border-bottom:1px dashed rgba(107,14,43,.35);}
+    .taxi-row a:hover{color:#3d0717;}
+    .taxi-plazas{display:inline-block;font-size:.7rem;font-weight:700;background:#6b0e2b;color:#fce8ef;padding:2px 8px;border-radius:20px;margin-left:auto;flex-shrink:0;}
+    .taxi-header{display:flex;align-items:center;justify-content:space-between;}
+    .taxi-arrow{font-size:.75rem;color:#8b1a3a;transition:transform .2s;}
+    .taxi-card.open .taxi-arrow{transform:rotate(180deg);}
+    .menu-wrap{background:rgba(255,255,255,.28);border:1px solid rgba(255,255,255,.45);border-radius:18px;padding:1.6rem 1.4rem;}
+    .menu-title{font-family:'Dancing Script',cursive;font-size:2rem;color:#6b0e2b;text-align:center;margin-bottom:.2rem;}
+    .menu-subtitle{font-family:'Dancing Script',cursive;font-size:1rem;color:#8b1a3a;text-align:center;margin-bottom:1.4rem;opacity:.8;}
+    .menu-section-title{font-family:'Dancing Script',cursive;font-size:1.15rem;color:#8b1a3a;text-align:center;margin:1rem 0 .6rem;letter-spacing:.04em;}
+    .menu-item{font-family:'Dancing Script',cursive;font-size:1.05rem;color:#6b0e2b;text-align:center;line-height:1.7;}
+    .menu-divider{display:flex;align-items:center;justify-content:center;gap:10px;margin:1rem 0;}
+    .menu-salud{font-family:'Dancing Script',cursive;font-size:1.9rem;color:#6b0e2b;text-align:center;margin:1.2rem 0 .4rem;}
+    .footer{text-align:center;margin-top:1.5rem;}
+    .fs{font-family:'Dancing Script',cursive;font-size:1.3rem;color:#6b0e2b;line-height:1.6;margin-bottom:1rem;}
+    .fw{position:absolute;left:1.5rem;top:38%;opacity:.28;animation:fW 4s infinite ease-in-out;}
+    .fd{position:absolute;right:1.2rem;top:58%;opacity:.28;animation:fD 3.5s infinite ease-in-out;}
+    @keyframes fW{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-10px) rotate(-5deg)}}
+    @keyframes fD{0%,100%{transform:translateY(0) rotate(5deg)}50%{transform:translateY(-8px) rotate(8deg)}}
+    .sp{animation:tw 2s infinite ease-in-out;}
+    .sp:nth-child(2){animation-delay:.4s}.sp:nth-child(3){animation-delay:.8s}.sp:nth-child(4){animation-delay:1.2s}
+    @keyframes tw{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+    .ph{animation:pH 1.8s infinite ease-in-out;display:inline-block;}
+    @keyframes pH{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+    @media(max-width:480px){.fw,.fd{display:none}.wc{padding:2rem 1rem 2.5rem}}
   </style>
 </head>
 <body>
-<div class="wedding-card">
+<div class="wc">
+  <div class="bgc" style="width:260px;height:260px;top:-80px;right:-80px;"></div>
+  <div class="bgc" style="width:180px;height:180px;bottom:60px;left:-60px;"></div>
 
-  <!-- Decorative circles -->
-  <div class="bg-circle" style="width:260px;height:260px;top:-80px;right:-80px;"></div>
-  <div class="bg-circle" style="width:180px;height:180px;bottom:60px;left:-60px;"></div>
-
-  <!-- Floating wine glass -->
-  <svg class="float-wine" width="44" height="70" viewBox="0 0 44 70" fill="none">
-    <path d="M8 4 Q4 18 4 24 Q4 36 22 40 Q40 36 40 24 Q40 18 36 4 Z" fill="#8b1a3a" opacity="0.7"/>
-    <circle cx="18" cy="20" r="5" fill="#c0334f" opacity="0.6"/>
-    <rect x="20" y="40" width="4" height="18" rx="2" fill="#8b1a3a" opacity="0.7"/>
-    <rect x="12" y="56" width="20" height="3" rx="1.5" fill="#8b1a3a" opacity="0.7"/>
+  <svg class="fw" width="44" height="70" viewBox="0 0 44 70" fill="none">
+    <path d="M8 4 Q4 18 4 24 Q4 36 22 40 Q40 36 40 24 Q40 18 36 4 Z" fill="#8b1a3a" opacity=".7"/>
+    <circle cx="18" cy="20" r="5" fill="#c0334f" opacity=".6"/>
+    <rect x="20" y="40" width="4" height="18" rx="2" fill="#8b1a3a" opacity=".7"/>
+    <rect x="12" y="56" width="20" height="3" rx="1.5" fill="#8b1a3a" opacity=".7"/>
+  </svg>
+  <svg class="fd" width="48" height="48" viewBox="0 0 48 48" fill="none">
+    <rect x="22" y="0" width="4" height="8" rx="2" fill="#8b1a3a" opacity=".7"/>
+    <circle cx="24" cy="30" r="16" fill="#c0334f" opacity=".5"/>
+    <rect x="16" y="22" width="6" height="5" rx="1" fill="#fff" opacity=".4"/>
+    <rect x="24" y="22" width="6" height="5" rx="1" fill="#fff" opacity=".3"/>
+    <rect x="12" y="29" width="6" height="5" rx="1" fill="#fff" opacity=".35"/>
+    <rect x="20" y="29" width="6" height="5" rx="1" fill="#fff" opacity=".4"/>
+    <rect x="28" y="29" width="6" height="5" rx="1" fill="#fff" opacity=".3"/>
+    <rect x="16" y="36" width="6" height="5" rx="1" fill="#fff" opacity=".35"/>
+    <rect x="24" y="36" width="6" height="5" rx="1" fill="#fff" opacity=".3"/>
+    <line x1="42" y1="18" x2="46" y2="14" stroke="#8b1a3a" stroke-width="1.5" opacity=".5"/>
+    <line x1="44" y1="22" x2="48" y2="22" stroke="#8b1a3a" stroke-width="1.5" opacity=".5"/>
+    <line x1="42" y1="26" x2="46" y2="30" stroke="#8b1a3a" stroke-width="1.5" opacity=".5"/>
   </svg>
 
-  <!-- Floating disco ball -->
-  <svg class="float-disco" width="48" height="56" viewBox="0 0 48 48" fill="none">
-    <rect x="22" y="0" width="4" height="8" rx="2" fill="#8b1a3a" opacity="0.7"/>
-    <circle cx="24" cy="30" r="16" fill="#c0334f" opacity="0.5"/>
-    <rect x="16" y="22" width="6" height="5" rx="1" fill="#fff" opacity="0.4"/>
-    <rect x="24" y="22" width="6" height="5" rx="1" fill="#fff" opacity="0.3"/>
-    <rect x="12" y="29" width="6" height="5" rx="1" fill="#fff" opacity="0.35"/>
-    <rect x="20" y="29" width="6" height="5" rx="1" fill="#fff" opacity="0.4"/>
-    <rect x="28" y="29" width="6" height="5" rx="1" fill="#fff" opacity="0.3"/>
-    <rect x="16" y="36" width="6" height="5" rx="1" fill="#fff" opacity="0.35"/>
-    <rect x="24" y="36" width="6" height="5" rx="1" fill="#fff" opacity="0.3"/>
-    <line x1="42" y1="18" x2="46" y2="14" stroke="#8b1a3a" stroke-width="1.5" opacity="0.5"/>
-    <line x1="44" y1="22" x2="48" y2="22" stroke="#8b1a3a" stroke-width="1.5" opacity="0.5"/>
-    <line x1="42" y1="26" x2="46" y2="30" stroke="#8b1a3a" stroke-width="1.5" opacity="0.5"/>
-  </svg>
-
-  <!-- Header -->
   <div class="header">
-    <div class="divider-top">
-      <div class="divider-line"></div>
-      <svg width="18" height="16" viewBox="0 0 20 18" fill="#8b1a3a"><path d="M10 16s-8-5.5-8-10A5 5 0 0 1 10 4a5 5 0 0 1 8 2c0 4.5-8 10-8 10z"/></svg>
-      <div class="divider-line"></div>
-    </div>
+    <div class="dt"><div class="dl"></div>
+      <svg width="16" height="14" viewBox="0 0 20 18" fill="#8b1a3a"><path d="M10 16s-8-5.5-8-10A5 5 0 0 1 10 4a5 5 0 0 1 8 2c0 4.5-8 10-8 10z"/></svg>
+    <div class="dl"></div></div>
     <div class="names">Maravilla e Iván</div>
     <div class="date">11 de abril de 2026</div>
-    <div class="divider-top" style="margin-top:0.5rem;">
-      <div class="divider-line"></div>
-      <svg width="18" height="16" viewBox="0 0 20 18" fill="#8b1a3a"><path d="M10 16s-8-5.5-8-10A5 5 0 0 1 10 4a5 5 0 0 1 8 2c0 4.5-8 10-8 10z"/></svg>
-      <div class="divider-line"></div>
+    <div class="dt" style="margin-top:.4rem;"><div class="dl"></div>
+      <svg width="16" height="14" viewBox="0 0 20 18" fill="#8b1a3a"><path d="M10 16s-8-5.5-8-10A5 5 0 0 1 10 4a5 5 0 0 1 8 2c0 4.5-8 10-8 10z"/></svg>
+    <div class="dl"></div></div>
+  </div>
+
+  <div class="nav">
+    <button class="nb active" onclick="showP('programa',this)">📋 Programa</button>
+    <button class="nb" onclick="showP('menu',this)">🍽️ Menú</button>
+    <button class="nb" onclick="showP('fotos',this)">📸 Sube tus fotos</button>
+    <button class="nb" onclick="showP('mensaje',this)">💌 Deja un mensaje</button>
+    <button class="nb" onclick="showP('taxis',this)">🚕 Taxis</button>
+  </div>
+
+  <div class="panel active" id="panel-programa">
+    <div class="si"><div class="ie">🚌</div><div class="ic"><div class="it">Autobús · Ida</div><div class="iv"><a href="https://www.google.com/maps/search/?api=1&query=Carrera+de+las+Monjas+2+Priego+de+C%C3%B3rdoba" target="_blank"><svg width="10" height="13" viewBox="0 0 14 18" fill="#6b0e2b"><path d="M7 0C4.24 0 2 2.24 2 5c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg> Carrera de las Monjas, 2</a></div></div><div class="tm">12:00 h.</div></div>
+    <div class="si"><div class="ie">💍</div><div class="ic"><div class="it">Ceremonia</div><div class="iv"><a href="https://www.google.com/maps/place/HOTEL+HUERTA+DE+LAS+PALOMAS/@37.4591206,-4.2430806,17z" target="_blank"><svg width="10" height="13" viewBox="0 0 14 18" fill="#6b0e2b"><path d="M7 0C4.24 0 2 2.24 2 5c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg> Huerta Las Palomas</a></div></div><div class="tm">13:00 h.</div></div>
+    <div class="si"><div class="ie">🥂</div><div class="ic"><div class="it">Cóctel</div><div class="iv"><a href="https://www.google.com/maps/place/HOTEL+HUERTA+DE+LAS+PALOMAS/@37.4591206,-4.2430806,17z" target="_blank"><svg width="10" height="13" viewBox="0 0 14 18" fill="#6b0e2b"><path d="M7 0C4.24 0 2 2.24 2 5c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg> Huerta Las Palomas</a></div></div><div class="tm">14:00 h.</div></div>
+    <div class="si"><div class="ie">🍽️</div><div class="ic"><div class="it">Comida</div><div class="iv"><a href="https://www.google.com/maps/place/HOTEL+HUERTA+DE+LAS+PALOMAS/@37.4591206,-4.2430806,17z" target="_blank"><svg width="10" height="13" viewBox="0 0 14 18" fill="#6b0e2b"><path d="M7 0C4.24 0 2 2.24 2 5c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg> Huerta Las Palomas</a></div></div><div class="tm">15:00 h.</div></div>
+    <div class="si"><div class="ie">💃</div><div class="ic"><div class="it">Baile y Copitas</div><div class="iv"><a href="https://www.google.com/maps/place/HOTEL+HUERTA+DE+LAS+PALOMAS/@37.4591206,-4.2430806,17z" target="_blank"><svg width="10" height="13" viewBox="0 0 14 18" fill="#6b0e2b"><path d="M7 0C4.24 0 2 2.24 2 5c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg> Huerta Las Palomas</a></div></div><div class="tm">18:00 h.</div></div>
+    <div class="si"><div class="ie">🚌</div><div class="ic"><div class="it">Primer Autobús · Regreso</div></div><div class="tm">21:30 h.</div></div>
+    <div class="si"><div class="ie">🌙</div><div class="ic"><div class="it">Último Autobús · Regreso</div></div><div class="tm">00:30 h.</div></div>
+    <div class="si"><div class="ie">🎤</div><div class="ic"><div class="it">Karaoke</div><div class="iv"><a href="https://www.google.com/maps/search/?api=1&query=Avenida+de+Espa%C3%B1a+26+Priego+de+C%C3%B3rdoba" target="_blank"><svg width="10" height="13" viewBox="0 0 14 18" fill="#6b0e2b"><path d="M7 0C4.24 0 2 2.24 2 5c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg> Casi40 · Av. de España, 26</a></div></div><div class="tm my">¿¿.?? h.</div></div>
+  </div>
+
+  <div class="panel" id="panel-menu">
+    <div class="menu-wrap">
+      <div class="menu-title">Maravilla e Iván</div>
+      <div class="menu-subtitle">11 de abril de 2026 · Priego de Córdoba</div>
+      <div class="menu-section-title">— Cóctel —</div>
+      <div class="menu-item">Jamón ibérico al corte</div>
+      <div class="menu-item">Dados de queso</div>
+      <div class="menu-item">Gildas variadas</div>
+      <div class="menu-item">Cucharita de bonito en aceite con vinagreta</div>
+      <div class="menu-item">Muselina de puerro y jamón</div>
+      <div class="menu-item">Mini canelón de ciervo al Pedro Ximénez</div>
+      <div class="menu-item">Lollipops de foie y chocolate</div>
+      <div class="menu-item">Empanadillas de setas y langostinos</div>
+      <div class="menu-item">Daditos de patata rellenos de rabo de toro</div>
+      <div class="menu-item">Brocheta de pulpo y langostinos</div>
+      <div class="menu-divider"><div class="dl"></div><svg width="13" height="11" viewBox="0 0 20 18" fill="#8b1a3a"><path d="M10 16s-8-5.5-8-10A5 5 0 0 1 10 4a5 5 0 0 1 8 2c0 4.5-8 10-8 10z"/></svg><div class="dl"></div></div>
+      <div class="menu-section-title">— Platos Principales —</div>
+      <div class="menu-item">Gambas cocidas</div>
+      <div class="menu-item">Bacalao gratinado con alioli de membrillo</div>
+      <div class="menu-item">Sorbete de limón al cava</div>
+      <div class="menu-item">Milhojas de secreto ibérico con manzana caramelizada en su jugo</div>
+      <div class="menu-divider"><div class="dl"></div><svg width="13" height="11" viewBox="0 0 20 18" fill="#8b1a3a"><path d="M10 16s-8-5.5-8-10A5 5 0 0 1 10 4a5 5 0 0 1 8 2c0 4.5-8 10-8 10z"/></svg><div class="dl"></div></div>
+      <div class="menu-section-title">— Postre —</div>
+      <div class="menu-item">Tarta de piononos, crema tostada,</div>
+      <div class="menu-item">merengue y tocino de cielo</div>
+      <div class="menu-salud">¡Salud!</div>
     </div>
   </div>
 
-  <!-- Schedule -->
-  <div class="schedule">
-
-    <div class="schedule-item">
-      <div class="item-emoji">🚌</div>
-      <div class="item-content">
-        <div class="item-title">Autobús · Ida</div>
-        <div class="item-venue">
-          <a href="https://www.google.com/maps/search/?api=1&query=Carrera+de+las+Monjas+2+Priego+de+C%C3%B3rdoba" target="_blank">
-            <svg width="10" height="13" viewBox="0 0 14 18" fill="#6b0e2b"><path d="M7 0C4.24 0 2 2.24 2 5c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
-            Carrera de las Monjas, 2
-          </a>
-        </div>
-      </div>
-      <div class="item-time">12:00 h.</div>
+  <div class="panel" id="panel-fotos">
+    <div class="ec">
+      <h3>📸 Sube tus fotos</h3>
+      <p>¿Has capturado algún momento especial del día? Puedes compartir tus fotos con nosotros para tener un recuerdo para siempre.</p>
+      <a class="bb" href="https://drive.google.com/drive/folders/1gwzYvFMaabI9iGXer6-_bVIHib9x4ONC?usp=sharing" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fce8ef" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Subir fotos a Google Drive
+      </a>
     </div>
-
-    <div class="schedule-item">
-      <div class="item-emoji">💍</div>
-      <div class="item-content">
-        <div class="item-title">Ceremonia</div>
-        <div class="item-venue">
-          <a href="https://www.google.com/maps/place/HOTEL+HUERTA+DE+LAS+PALOMAS/@37.4591206,-4.2430806,17z" target="_blank">
-            <svg width="10" height="13" viewBox="0 0 14 18" fill="#6b0e2b"><path d="M7 0C4.24 0 2 2.24 2 5c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
-            Huerta Las Palomas
-          </a>
-        </div>
-      </div>
-      <div class="item-time">13:00 h.</div>
-    </div>
-
-    <div class="schedule-item">
-      <div class="item-emoji">🥂</div>
-      <div class="item-content">
-        <div class="item-title">Cóctel</div>
-        <div class="item-venue">
-          <a href="https://www.google.com/maps/place/HOTEL+HUERTA+DE+LAS+PALOMAS/@37.4591206,-4.2430806,17z" target="_blank">
-            <svg width="10" height="13" viewBox="0 0 14 18" fill="#6b0e2b"><path d="M7 0C4.24 0 2 2.24 2 5c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
-            Huerta Las Palomas
-          </a>
-        </div>
-      </div>
-      <div class="item-time">14:00 h.</div>
-    </div>
-
-    <div class="schedule-item">
-      <div class="item-emoji">🍽️</div>
-      <div class="item-content">
-        <div class="item-title">Comida</div>
-        <div class="item-venue">
-          <a href="https://www.google.com/maps/place/HOTEL+HUERTA+DE+LAS+PALOMAS/@37.4591206,-4.2430806,17z" target="_blank">
-            <svg width="10" height="13" viewBox="0 0 14 18" fill="#6b0e2b"><path d="M7 0C4.24 0 2 2.24 2 5c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
-            Huerta Las Palomas
-          </a>
-        </div>
-      </div>
-      <div class="item-time">15:00 h.</div>
-    </div>
-
-    <div class="schedule-item">
-      <div class="item-emoji">💃</div>
-      <div class="item-content">
-        <div class="item-title">Baile y Copitas</div>
-        <div class="item-venue">
-          <a href="https://www.google.com/maps/place/HOTEL+HUERTA+DE+LAS+PALOMAS/@37.4591206,-4.2430806,17z" target="_blank">
-            <svg width="10" height="13" viewBox="0 0 14 18" fill="#6b0e2b"><path d="M7 0C4.24 0 2 2.24 2 5c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
-            Huerta Las Palomas
-          </a>
-        </div>
-      </div>
-      <div class="item-time">18:00 h.</div>
-    </div>
-
-    <div class="schedule-item">
-      <div class="item-emoji">🚌</div>
-      <div class="item-content">
-        <div class="item-title">Primer Autobús · Regreso</div>
-      </div>
-      <div class="item-time">21:30 h.</div>
-    </div>
-
-    <div class="schedule-item">
-      <div class="item-emoji">🌙</div>
-      <div class="item-content">
-        <div class="item-title">Último Autobús · Regreso</div>
-      </div>
-      <div class="item-time">00:30 h.</div>
-    </div>
-
-    <div class="schedule-item">
-      <div class="item-emoji">🎤</div>
-      <div class="item-content">
-        <div class="item-title">Karaoke</div>
-        <div class="item-venue">
-          <a href="https://www.google.com/maps/search/?api=1&query=Avenida+de+Espa%C3%B1a+26+Priego+de+C%C3%B3rdoba" target="_blank">
-            <svg width="10" height="13" viewBox="0 0 14 18" fill="#6b0e2b"><path d="M7 0C4.24 0 2 2.24 2 5c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
-            Casi40 · Av. de España, 26
-          </a>
-        </div>
-      </div>
-      <div class="item-time mystery">¿¿.?? h.</div>
-    </div>
-
   </div>
 
-  <!-- Footer -->
+  <div class="panel" id="panel-mensaje">
+    <div class="ec">
+      <h3>💌 Déjanos un mensaje</h3>
+      <p>Si quieres puedes enviarnos un mensaje como un recuerdo de este día tan especial.</p>
+      <input class="mn" id="msg-name" type="text" placeholder="Tu nombre" />
+      <textarea class="mta" id="msg-text" placeholder="Escribe aquí tu mensaje para Maravilla e Iván..."></textarea>
+      <button class="bb" onclick="enviarMensaje()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fce8ef" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Enviar mensaje
+      </button>
+      <div class="ms" id="msg-sent">💌 ¡Mensaje enviado con todo el amor!</div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-taxis">
+    <div class="ec">
+      <h3>🚕 Taxis en Priego de Córdoba</h3>
+      <p>Si crees que vas a necesitar taxi a la noche, avisa con antelación. Toca cada tarjeta para ver el contacto.</p>
+      <div class="taxi-grid" id="taxi-grid"></div>
+    </div>
+  </div>
+
   <div class="footer">
-    <div style="display:flex;justify-content:center;margin:1rem 0;">
-      <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
-        <g stroke="#8b1a3a" stroke-width="1.5" opacity="0.6">
-          <line x1="45" y1="10" x2="45" y2="2"/>
-          <line x1="45" y1="80" x2="45" y2="88"/>
-          <line x1="10" y1="45" x2="2" y2="45"/>
-          <line x1="80" y1="45" x2="88" y2="45"/>
-          <line x1="22" y1="22" x2="16" y2="16"/>
-          <line x1="68" y1="22" x2="74" y2="16"/>
-          <line x1="22" y1="68" x2="16" y2="74"/>
-          <line x1="68" y1="68" x2="74" y2="74"/>
+    <div style="display:flex;justify-content:center;margin:1.5rem 0 1rem;">
+      <svg width="86" height="86" viewBox="0 0 90 90" fill="none">
+        <g stroke="#8b1a3a" stroke-width="1.5" opacity=".6">
+          <line x1="45" y1="10" x2="45" y2="2"/><line x1="45" y1="80" x2="45" y2="88"/>
+          <line x1="10" y1="45" x2="2" y2="45"/><line x1="80" y1="45" x2="88" y2="45"/>
+          <line x1="22" y1="22" x2="16" y2="16"/><line x1="68" y1="22" x2="74" y2="16"/>
+          <line x1="22" y1="68" x2="16" y2="74"/><line x1="68" y1="68" x2="74" y2="74"/>
         </g>
-        <g class="sparkle" fill="#c0334f" opacity="0.7"><polygon points="12,12 13.5,10 15,12 13.5,14"/></g>
-        <g class="sparkle" fill="#c0334f" opacity="0.7"><polygon points="75,14 76.5,12 78,14 76.5,16"/></g>
-        <g class="sparkle" fill="#c0334f" opacity="0.7"><polygon points="12,76 13.5,74 15,76 13.5,78"/></g>
-        <g class="sparkle" fill="#c0334f" opacity="0.7"><polygon points="75,74 76.5,72 78,74 76.5,76"/></g>
-        <path class="pulse-heart" d="M45 62 C45 62 22 50 22 35 A11 11 0 0 1 45 30 A11 11 0 0 1 68 35 C68 50 45 62 45 62 Z" fill="#8b1a3a"/>
-        <circle cx="37" cy="33" r="3.5" fill="#c0334f" opacity="0.5"/>
+        <g class="sp" fill="#c0334f" opacity=".7"><polygon points="12,12 13.5,10 15,12 13.5,14"/></g>
+        <g class="sp" fill="#c0334f" opacity=".7"><polygon points="75,14 76.5,12 78,14 76.5,16"/></g>
+        <g class="sp" fill="#c0334f" opacity=".7"><polygon points="12,76 13.5,74 15,76 13.5,78"/></g>
+        <g class="sp" fill="#c0334f" opacity=".7"><polygon points="75,74 76.5,72 78,74 76.5,76"/></g>
+        <path class="ph" d="M45 62 C45 62 22 50 22 35 A11 11 0 0 1 45 30 A11 11 0 0 1 68 35 C68 50 45 62 45 62 Z" fill="#8b1a3a"/>
+        <circle cx="37" cy="33" r="3.5" fill="#c0334f" opacity=".5"/>
       </svg>
     </div>
-    <div class="footer-script">
-      Obligatorio acudir con mucho amor<br>y ganas de pasarlo bien.
-    </div>
-    <div class="footer-script" style="font-size:1.6rem;">Os queremos. 🤍</div>
-    <div class="account-box">
-      <div class="account-label">Número de cuenta</div>
-      <div class="account-number">ES66 1586 0001 4905 7120 0211</div>
-    </div>
+    <div class="fs">Obligatorio acudir con mucho amor<br>y ganas de pasarlo bien.</div>
+    <div class="fs" style="font-size:1.55rem;">Os queremos. 🤍</div>
   </div>
-
 </div>
+
+<script>
+  const taxis = [
+    {nombre:"Trini Arroyo Adamuz",email:"mariabulebu@hotmail.com",tels:["676 30 75 73"],plazas:"5"},
+    {nombre:"Elena Expósito Marín",email:"elenaexpositomarin@gmail.com",tels:["957 701 222","639 09 93 46"],plazas:"5+1PMR"},
+    {nombre:"Rafael Expósito Marín",email:"taxirafaelexposito@gmail.com",tels:["619 83 65 52"],plazas:"5"},
+    {nombre:"Domingo López Ballesteros",email:"zaprico@hotmail.com",tels:["658 93 37 92","627 21 35 19"],plazas:"7 · 24h"},
+    {nombre:"Juan Malagón Rodríguez",email:"juaneltaxista@hotmail.com",tels:["957 543 106","657 58 80 59"],plazas:"7"},
+    {nombre:"Francisco Montes Pozo",email:"montespozopaco@yahoo.es",tels:["957 700 173","655 95 30 42"],plazas:"5 · 24h"},
+    {nombre:"Rafael Pulido Cano",email:"taxipulido@hotmail.com",tels:["957 701 222","630 35 11 83"],plazas:"9"},
+    {nombre:"Antonio Caballero Laredo",email:"caballerolaredo@hotmail.com",tels:["616 90 18 59"],plazas:"5"},
+    {nombre:"Ángel M. Delgado Rosa",email:"angelm_dr@hotmail.com",tels:["957 847 123","657 21 36 37"],plazas:"8"},
+    {nombre:"José Luis Molina Adamuz",email:"taxijoseluismolina@hotmail.es",tels:["650 12 65 70"],plazas:"5"},
+    {nombre:"Manuel Molina Adamuz",email:"manuelmolinaadamuz@gmail.com",tels:["651 74 87 34"],plazas:"5+1PMR"},
+    {nombre:"Antonio Ortuño Ropero",email:"taxipriego@gmail.com",tels:["957 701 110","636 77 24 87"],plazas:"5"},
+    {nombre:"Javier Rodríguez Lendínez",email:"javirolen@gmail.com",tels:["672 30 83 05"],plazas:"8"},
+    {nombre:"Rafael Serrano Grande",email:"taxirafaelserrano@hotmail.com",tels:["665 46 33 78"],plazas:"5"}
+  ];
+
+  const grid = document.getElementById('taxi-grid');
+  taxis.forEach(t => {
+    const telsHTML = t.tels.map(tel =>
+      `<div class="taxi-row">📞 <a href="tel:+34${tel.replace(/\s/g,'')}">${tel}</a></div>`
+    ).join('');
+    const card = document.createElement('div');
+    card.className = 'taxi-card';
+    card.innerHTML = `
+      <div class="taxi-header">
+        <div class="taxi-name">🚕 ${t.nombre}</div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span class="taxi-plazas">${t.plazas} plazas</span>
+          <span class="taxi-arrow">▼</span>
+        </div>
+      </div>
+      <div class="taxi-info">
+        ${telsHTML}
+        <div class="taxi-row">✉️ <a href="mailto:${t.email}">${t.email}</a></div>
+      </div>`;
+    card.onclick = () => card.classList.toggle('open');
+    grid.appendChild(card);
+  });
+
+  function showP(name, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nb').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function enviarMensaje() {
+    const nombre = document.getElementById('msg-name').value.trim();
+    const txt = document.getElementById('msg-text').value.trim();
+    if (!txt) { alert('Por favor escribe un mensaje antes de enviar.'); return; }
+    const asunto = encodeURIComponent('💌 Mensaje de boda de ' + (nombre || 'un invitado'));
+    const cuerpo = encodeURIComponent((nombre ? 'De: ' + nombre + '\n\n' : '') + txt);
+    window.location.href = 'mailto:ivan.minambres@gmail.com,maravillamunoz@gmail.com?subject=' + asunto + '&body=' + cuerpo;
+    document.getElementById('msg-name').value = '';
+    document.getElementById('msg-text').value = '';
+    const s = document.getElementById('msg-sent');
+    s.style.display = 'block';
+    setTimeout(() => s.style.display = 'none', 4000);
+  }
+</script>
 </body>
 </html>
